@@ -3,79 +3,313 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ServiceProviderDashboard"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="@color/special_activity_background">
+
+    <ProgressBar
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/service_provider_dashboard_progress"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/service_provider_scrollview">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:text="Mark Chaulics"
             android:gravity="center"
+            android:maxLines="1"
+            android:id="@+id/service_provider_dashboard_provider_name"
+            android:ellipsize="end"
             android:textColor="@color/colorPrimary"/>
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="General House Cleaning"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/light_text_color"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="Customer Care Line: +2348102853533"
-            android:gravity="center"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/dark_text_color"/>
-        <CheckBox
-            android:layout_width="160dp"
             android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="Available for hiring"
-            android:checked="true"
-            android:layout_gravity="center"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:fontFamily="@font/clanbold"
+                android:text="Service Type"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/dark_text_color"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:fontFamily="@font/clannews"
+                android:text="Not Available"
+                android:id="@+id/service_provider_dashboard_service_type_text"
+                android:gravity="center"
+                android:maxLines="1"
+                android:layout_marginLeft="5dp"
+                android:ellipsize="end"
+                android:textColor="#797878"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:tint="@color/dark_text_color"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/service_provider_dashboard_service_type_select"
+                android:padding="10dp"
+                android:src="@drawable/ic_mode_edit_black_24dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:fontFamily="@font/clanbold"
+                android:text="Job Title:"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/dark_text_color"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:fontFamily="@font/clannews"
+                android:text="Not Available"
+                android:gravity="center"
+                android:id="@+id/service_provider_dashboard_job_type_text"
+                android:maxLines="1"
+                android:layout_marginLeft="5dp"
+                android:ellipsize="end"
+                android:textColor="#797878"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:tint="@color/dark_text_color"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
+                android:id="@+id/service_provider_dashboard_job_type_select"
+                android:src="@drawable/ic_mode_edit_black_24dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:fontFamily="@font/clanbold"
+                android:text="Phone:"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/dark_text_color"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:fontFamily="@font/clannews"
+                android:text="Not Available"
+                android:id="@+id/service_provider_dashboard_phone_text"
+                android:gravity="center"
+                android:maxLines="1"
+                android:layout_marginLeft="5dp"
+                android:ellipsize="end"
+                android:textColor="#797878"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:tint="@color/dark_text_color"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
+                android:id="@+id/service_provider_dashboard_phone_select"
+                android:src="@drawable/ic_mode_edit_black_24dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:fontFamily="@font/clanbold"
+                android:text="Rate:"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/dark_text_color"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/clannews"
+                android:gravity="center"
+                android:maxLines="1"
+                android:id="@+id/service_provider_dashboard_rate_text"
+                android:text="Not Available"
+                android:textColor="#797878"
+                android:textSize="12dp"/>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:tint="@color/dark_text_color"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
+                android:id="@+id/service_provider_dashboard_rate_select"
+                android:src="@drawable/ic_mode_edit_black_24dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+
+           <ImageView
+               android:layout_width="20dp"
+               android:layout_height="20dp"
+               android:tint="@color/yellow"
+               android:src="@drawable/iconfinder_icons_favorite"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="4.7(800)"
+                android:id="@+id/service_provider_dashboard_rate"
+                android:gravity="center"
+                android:fontFamily="@font/clanbold"
+                android:textColor="@color/dark_text_color"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="270dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/add_to_cart_background"
+            android:backgroundTint="#DBDBDB"
+            android:gravity="center">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/service_provider_dashboard_availability_switch"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:checked="false"
+                android:text="Available for hiring"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Portfolio"
             android:gravity="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20dp"/>
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="150dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:text="Add Portfolio"
-            android:layout_alignParentRight="true"
-            android:id="@+id/dashboard_add_product"
-            android:textAllCaps="false"/>
+            android:fontFamily="@font/clanmed"
+            android:textColor="@color/dark_text_color"
+            android:textSize="15dp"/>
+
+          <LinearLayout
+              android:layout_width="120dp"
+              android:layout_height="40dp"
+              android:layout_marginTop="10dp"
+              android:orientation="horizontal"
+              android:gravity="center|right"
+              android:id="@+id/service_provider_dashboard_select_porfolio"
+              android:layout_alignParentRight="true">
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Select"
+                  android:gravity="center"
+                  android:textColor="@color/light_text_color"
+                  android:textSize="15dp"/>
+
+              <ImageView
+                  android:layout_width="20dp"
+                  android:layout_height="20dp"
+                  android:src="@drawable/iconfinder_chevron_left_4781844"
+                  android:rotation="180"
+                  android:tint="@color/light_text_color"/>
+          </LinearLayout>
     </RelativeLayout>
 
-    <include layout="@layout/product_image_scrollview"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:id="@+id/no_portfolio_available_layout">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="No Portfolio Available"/>
+            </LinearLayout>
 
+            <include layout="@layout/product_image_scrollview"/>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

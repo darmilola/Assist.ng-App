@@ -1,9 +1,11 @@
 package ng.assist.UIs.ViewModel;
 
-import com.stfalcon.chatkit.commons.models.IMessage;
-import com.stfalcon.chatkit.commons.models.MessageContentType;
+
 
 import java.util.Date;
+
+import ng.assist.UIs.chatkit.commons.models.IMessage;
+import ng.assist.UIs.chatkit.commons.models.MessageContentType;
 
 /*
  * Created by troy379 on 04.04.17.
@@ -12,28 +14,24 @@ public class Message implements IMessage,
         MessageContentType.Image, /*this is for default image messages implementation*/
         MessageContentType /*and this one is for custom content type (in this case - voice message)*/ {
 
-    private String id;
     private String text;
     private Date createdAt;
     private User user;
     private Image image;
     private Voice voice;
 
-    public Message(String id, User user, String text) {
-        this(id, user, text, new Date());
+    public Message(User user, String text) {
+        this(user, text,new Date());
     }
 
-    public Message(String id, User user, String text, Date createdAt) {
-        this.id = id;
+    public Message(User user, String text, Date createdAt) {
         this.text = text;
         this.user = user;
         this.createdAt = createdAt;
     }
 
-    @Override
-    public String getId() {
-        return id;
-    }
+
+
 
     @Override
     public String getText() {

@@ -12,6 +12,7 @@ import ng.assist.UIs.DmFragment;
 import ng.assist.UIs.HomeFragment;
 import ng.assist.UIs.ViewModel.MainActivityModel;
 import ng.assist.UIs.Wallet;
+import ng.assist.UIs.WalletKt;
 
 import android.content.Context;
 import android.content.Intent;
@@ -72,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.userFirstname = mainActivityModel.getUserFirstname();
                 MainActivity.this.userWalletBalance = mainActivityModel.getUserWalletBalance();
                 preferences.edit().putString("walletBalance",userWalletBalance).apply();
+                preferences.edit().putString("firstname",mainActivityModel.getUserFirstname()).apply();
+                preferences.edit().putString("lastname",mainActivityModel.getUserLastname()).apply();
+                preferences.edit().putString("imageUrl",mainActivityModel.getUserImageUrl()).apply();
+                preferences.edit().putString("accountType",mainActivityModel.getAccountType()).apply();
+                preferences.edit().putString("isVerified",mainActivityModel.getIsVerified()).apply();
                 setupViewPager(viewPager);
             }
 
@@ -131,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
                     return homeFragment;
                 case 1:
-                    Wallet wallet = new Wallet();
+                    WalletKt wallet = new WalletKt();
                     Bundle bdata = new Bundle();
                     bdata.putString("walletBalance", MainActivity.this.userWalletBalance);
                     wallet.setArguments(bdata);
@@ -175,14 +181,19 @@ public class MainActivity extends AppCompatActivity {
         data.putString("firstname",MainActivity.this.userFirstname);
         homeFragment.setArguments(data);
         adapter.addFragment(homeFragment, "Home");
-
-        adapter.addFragment(new Wallet(), "Wallet");
+        adapter.addFragment(new WalletKt(), "Wallet");
         adapter.addFragment(new DmFragment(), "Dm");
         adapter.addFragment(new AccountFragments(), "Accounts");
         viewPager.setAdapter(adapter);
+
     }
 
 
+
+    @Override
+    public void onBackPressed(){
+
+    }
 
 
     @Override

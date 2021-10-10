@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import ng.assist.R;
+import ng.assist.UIs.ViewModel.EstateDashboardModel;
+import ng.assist.UIs.ViewModel.ServicesModel;
 
 public class ProductImageScrollAdapter extends RecyclerView.Adapter<ProductImageScrollAdapter.itemViewHolder> {
 

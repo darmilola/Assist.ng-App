@@ -12,12 +12,19 @@
         <item name="itemTextAppearanceInactive">@style/BottomNavigationTextStyleInactive</item>
     </style>
 
+    <style name="NewRegisterTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="boxStrokeWidth">3dp</item>
+        <item name="android:textColorHint">@color/lighter_text_color</item>
+    </style>
+
 
     <style name="SequenceTitle" parent="@android:style/TextAppearance.Medium">
         <item name="android:ellipsize">end</item>
         <item name="android:textSize">18dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:maxLines">7</item>
+        <item name="android:maxLines">7 </item>
         <item name="android:fontFamily">@font/clannews</item>
     </style>
 
@@ -81,6 +88,55 @@
     <style name="ErrorText" parent="TextAppearance.Design.Error">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+
+    <style name="ChatMessageInfo">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="ChatHeaderTitle">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ChatWhoIsTyping">
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ChatSendButton">
+        <item name="android:maxLines">5</item>
+    </style>
+
+    <style name="ChatInputEditText">
+        <item name="android:background">@null</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="ChatMessageLayoutOutcoming">
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:gravity">end|right</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="ChatMessageLayoutIncoming">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:gravity">end|right</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="ChatHeaderLayout">
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

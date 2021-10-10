@@ -1,5 +1,6 @@
 package ng.assist;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import me.relex.circleindicator.CircleIndicator2;
+import ng.assist.Adapters.GroceryDetailProductAdapter;
 import ng.assist.Adapters.GroceryDisplayAdapter;
 import ng.assist.Adapters.GroceryStoreListingAdapter;
 import ng.assist.Adapters.ProductImageScrollAdapter;
@@ -14,7 +16,9 @@ import ng.assist.UIs.ViewModel.GroceryListingDetailsModel;
 import ng.assist.UIs.ViewModel.GroceryModel;
 import ng.assist.UIs.ViewModel.RetailerInfoModel;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -39,12 +43,13 @@ public class GroceryStoreListing extends AppCompatActivity {
     ArrayList<String> imagesList = new ArrayList<>();
     CircleIndicator2 imagesIndicator;
     TextView productName,description,price,shopname;
-    GroceryDisplayAdapter groceryDisplayAdapter;
+    GroceryDetailProductAdapter groceryDisplayAdapter;
     ProgressBar detailsProgressbar;
     LinearLayout detailsRootLayout;
     LinearLayout addToCart;
     GroceryModel groceryModel;
     View cartIndicator;
+    LinearLayout productImageviewScroll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,7 @@ public class GroceryStoreListing extends AppCompatActivity {
     }
 
     private void initView(){
+        productImageviewScroll = findViewById(R.id.scroll_image_layout);
         cartIndicator = findViewById(R.id.cart_indicator);
         cartIndicator.setVisibility(View.GONE);
         addToCart = findViewById(R.id.details_add_to_cart);
@@ -91,11 +97,12 @@ public class GroceryStoreListing extends AppCompatActivity {
                 detailsRootLayout.setVisibility(View.VISIBLE);
                 adapter = new ProductImageScrollAdapter(images,GroceryStoreListing.this);
                 imagesRecyclerview.setAdapter(adapter);
+                productImageviewScroll.setVisibility(View.VISIBLE);
                 pagerSnapHelper.attachToRecyclerView(imagesRecyclerview);
                 imagesIndicator.attachToRecyclerView(imagesRecyclerview, pagerSnapHelper);
                 adapter.registerAdapterDataObserver(imagesIndicator.getAdapterDataObserver());
                 shopname.setText(retailerInfoModel.getShopName());
-                groceryDisplayAdapter = new GroceryDisplayAdapter(groceryModelArrayList,GroceryStoreListing.this);
+                groceryDisplayAdapter = new GroceryDetailProductAdapter(groceryModelArrayList,GroceryStoreListing.this);
                 recyclerView.setAdapter(groceryDisplayAdapter);
 
             }
@@ -113,6 +120,7 @@ public class GroceryStoreListing extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(GroceryStoreListing.this,GroceryCart.class);
                 intent.putExtra("retailerId",groceryModel.getRetailerId());
+                intent.putExtra("retailerShopName",groceryModel.getShopName());
                 startActivity(intent);
             }
         });
@@ -147,5 +155,49 @@ public class GroceryStoreListing extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.special_activity_background));
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+          showAlert();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        deleteCart();
+    }
+
+    private void showAlert(){
+        new AlertDialog.Builder(GroceryStoreListing.this)
+                .setTitle("Exit Store")
+                .setMessage("Are you sure you want to exit these store, your current cart will be lost")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteCart();
+                        GroceryStoreListing.super.onBackPressed();
+                        dialog.dismiss();
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+     private void deleteCart(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(GroceryStoreListing.this);
+        String userId =  preferences.getString("userEmail","");
+        GroceryModel groceryModel = new GroceryModel(userId);
+        groceryModel.deleteUsersCart();
     }
 }

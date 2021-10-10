@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 30
@@ -21,6 +24,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
 }
 
 dependencies {
@@ -32,21 +37,20 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:30.+'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     androidTestImplementation 'androidx.test:runner:1.3.0'
     implementation 'com.facebook.fresco:fresco:1.10.0'
     implementation 'com.github.tiper:MaterialSpinner:1.4.2'
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
     implementation 'it.sephiroth.android.library.rangeseekbar:rangeseekbar:1.1.0'
-    implementation 'com.github.stfalcon:chatkit:0.3.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.github.transferwise:sequence-layout:1.1.1'
     implementation 'com.thefinestartist:finestwebview:1.2.7'
     implementation 'com.asksira.android:webviewsuite:1.0.3'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.asksira.android:webviewsuite:1.0.3'
     implementation 'com.thefinestartist:finestwebview:1.2.7'
@@ -58,4 +62,28 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'co.paystack.android:paystack:3.1.3'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.50"
+    implementation('io.socket:socket.io-client:2.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+    implementation 'org.apache.commons:commons-text:1.6'
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+    implementation 'io.github.lizhangqu:coreprogress:1.0.2'
+    def room_version = "2.3.0"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$room_version")
+
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+
+    // optional - RxJava2 support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    // optional - RxJava3 support for Room
+    implementation "androidx.room:room-rxjava3:$room_version"
 }
